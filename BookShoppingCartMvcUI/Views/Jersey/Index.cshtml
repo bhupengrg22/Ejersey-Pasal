@@ -1,0 +1,51 @@
+﻿@model IEnumerable<jersey>
+@{
+    Layout = "_AdminLayout";
+}
+
+<h2>jerseys</h2>
+
+<a asp-action="Addjersey" asp-controller="jersey" class="btn btn-primary">Add More</a>
+
+@if(Model?.Count()>0)
+{
+    <table class="table table-striped my-2">
+        <tr>
+            <th>Image</th>
+            <th>jersey</th>
+          
+            <th>category</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var jersey in Model)
+        {
+            <tr>
+                <td>
+                    @if(string.IsNullOrWhiteSpace(jersey.Image))
+                    {
+                        <img src="/Images/NoImage.png" style="width:80px;height:100px" alt="jersey image" />
+                    }
+                    else
+                    {
+                        <img src="/images/@jersey.Image" style="width:80px;height:100px" alt="jersey image" />
+                    }
+                </td>
+                <td>@jersey.jerseyName</td>
+                
+                <td>@jersey.category.categoryName</td>
+                <td>Rs: @jersey.Price</td>
+                <td>
+                    <a asp-action="Updatejersey" asp-controller="jersey" asp-route-id="@jersey.Id" class="btn btn-success">Edit</a>
+                    <a asp-action="Deletejersey" asp-controller="jersey" asp-route-id="@jersey.Id" class="btn btn-danger" onclick="return window.confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h3>No records</h3>
+}
+

@@ -1,0 +1,22 @@
+﻿@model categoryDTO
+@{
+    Layout = "_AdminLayout";
+}
+@* @Html.ValidationSummary() *@
+<div style="width:50%">
+<h2> Add category </h2>
+<a asp-action="Index" asp-controller="category" class="btn btn-primary">Back</a>
+<form asp-action="Addcategory">
+   @* <input type="hidden" asp-for="Id" /> *@
+
+   <div class="my-2">
+      <label>category</label>
+      <input type="text" class="form-control" asp-for="categoryName" />
+            <span asp-validation-for="categoryName" class="text-danger"></span>
+   </div>
+
+   <div class="my-2">
+      <button type="submit" class="btn btn-info">Add</button>
+   </div>
+</form>
+</div>
